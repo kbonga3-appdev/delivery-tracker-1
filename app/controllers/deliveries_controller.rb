@@ -36,6 +36,7 @@ class DeliveriesController < ApplicationController
     # the_delivery.date_edoa = params.fetch("query_date_edoa")
     the_delivery.details = params.fetch("query_details")
     the_delivery.status = "waiting on"
+    the_delivery.user_id = session.fetch(:user_id)
     # the_delivery.status = params.fetch("query_status")
 
     if the_delivery.valid?
@@ -50,14 +51,17 @@ class DeliveriesController < ApplicationController
     the_id = params.fetch("path_id")
     the_delivery = Delivery.where({ :id => the_id }).at(0)
 
-    the_delivery.description = params.fetch("query_description")
-    the_delivery.date_edoa = params.fetch("query_date_edoa")
-    the_delivery.details = params.fetch("query_details")
-    the_delivery.status = params.fetch("query_status")
+    # the_delivery.description = params.fetch("query_description")
+    # the_delivery.date_edoa = params.fetch("query_date_edoa")
+    # the_delivery.details = params.fetch("query_details")
+    # the_delivery.status = params.fetch("query_status")
+    the_delivery.status = "received"
 
     if the_delivery.valid?
       the_delivery.save
-      redirect_to("/deliveries/#{the_delivery.id}", { :notice => "Delivery updated successfully."} )
+      # redirect_to("/deliveries/#{the_delivery.id}", { :notice => "Delivery updated successfully."} )
+      redirect_to("/", { :notice => "Delivery updated successfully."} )
+      
     else
       redirect_to("/deliveries/#{the_delivery.id}", { :alert => the_delivery.errors.full_messages.to_sentence })
     end

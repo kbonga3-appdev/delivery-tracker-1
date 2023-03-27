@@ -1,3 +1,8 @@
+<div>
+<%= session.fetch(:user_id) %>
+</div>
+
+
 <h1>
       Delivery Tracker
     </h1>
@@ -53,27 +58,27 @@
 <div class="waiting_on">
   <h2>Waiting on</h2>
 
- <% @list_of_todos.each do |todos1| %>
+ <% @list_of_todos.each do |delivery| %>
   
 
-  <% if todos1.status == "waiting on" %>
+  <% if delivery.status == "waiting on" %>
   
  
 
   <ul>
-      <li>
-        <div>delivery.description</div>
+      <li> 
+        <div><%= delivery.description %></div>
 
         <div style="color: red">
-          delivery.date_edoa
+          Supposed to arrive on <%= delivery.date_edoa %>
         </div>
 
         <div>
-          
+          <%= delivery.description %>
         </div>
 
         <div>
-          <form action="/modify_delivery/167325" method="post">
+          <form action="/modify_delivery/<%= delivery.id %>" method="post">
             <input type="hidden" name="arrived" value="true">
 
             <button>Mark as received</button>
@@ -81,76 +86,35 @@
         </div>
         
         <br>
-
+</ul>
 <% end %>
 <% end %>
----------------
 
 
 
------------------------
 <hr>
 
 <div class="received">
   <h2>Received</h2>
 
+  <% @list_of_todos.each do |delivery| %>
+  
+
+  <% if delivery.status == "received" %>
+
   <ul>
       <li>
-        <div>Mediocre Wool Keyboard</div>
+        <div><%= delivery.description %></div>
 
         <div>
           <small>
-            Updated 3 minutes ago
+            <%= delivery.date_edoa %>
 
-            <a href="/delete_delivery/167333">Delete</a>
-          </small>
-        </div>
-      </li>
-      <li>
-        <div>Sleek Paper Keyboard</div>
-
-        <div>
-          <small>
-            Updated 3 minutes ago
-
-            <a href="/delete_delivery/167332">Delete</a>
-          </small>
-        </div>
-      </li>
-      <li>
-        <div>Ergonomic Granite Pants</div>
-
-        <div>
-          <small>
-            Updated 3 minutes ago
-
-            <a href="/delete_delivery/167330">Delete</a>
-          </small>
-        </div>
-      </li>
-      <li>
-        <div>Awesome Concrete Gloves</div>
-
-        <div>
-          <small>
-            Updated 3 minutes ago
-
-            <a href="/delete_delivery/167328">Delete</a>
-          </small>
-        </div>
-      </li>
-      <li>
-        <div>Small Silk Shirt</div>
-
-        <div>
-          <small>
-            Updated 3 minutes ago
-
-            <a href="/delete_delivery/167326">Delete</a>
+            <a href="/delete_delivery/<%= delivery.id %>">Delete</a>
           </small>
         </div>
       </li>
   </ul>
-</div>
 
-  
+<% end %>
+<% end %>
