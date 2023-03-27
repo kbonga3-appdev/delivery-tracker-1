@@ -108,7 +108,8 @@
 
         <div>
           <small>
-            <%= delivery.date_edoa %>
+            
+          Updated <%= time_ago_in_words(delivery.updated_at) %>
 
             <a href="/delete_delivery/<%= delivery.id %>">Delete</a>
           </small>
