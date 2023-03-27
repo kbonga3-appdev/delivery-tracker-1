@@ -69,9 +69,26 @@
       <li> 
         <div><%= delivery.description %></div>
 
+
+<% date_sent = Date.parse(delivery.date_edoa.to_s) %>
+<% date_now = Date.today %>
+<% how_many_days_have_passed = ( date_sent - date_now ).to_i %>
+
+<% if how_many_days_have_passed <= -3  %>
+
         <div style="color: red">
           Supposed to arrive on <%= delivery.date_edoa %>
         </div>
+
+ <% else %>
+        
+         <div style="color: black">
+          Supposed to arrive on <%= delivery.date_edoa %>
+        </div>
+
+<% end %>
+
+
 
         <div>
           <%= delivery.details %>
@@ -126,3 +143,13 @@
 
 <% end %>
 <% end %>
+
+
+
+
+<!--
+date_sent = Date.parse(‘2007-01-01’)
+date_now = Date.today
+
+how_many_days_have_passed = (date_now - date_sent).to_i
+-->
