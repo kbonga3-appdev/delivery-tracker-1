@@ -33,7 +33,8 @@ class UserAuthenticationController < ApplicationController
   def destroy_cookies
     reset_session
 
-    redirect_to("/", { :notice => "Signed out successfully." })
+    # redirect_to("/", { :notice => "Signed out successfully." })
+    redirect_to("/user_sign_in", { :notice => "Signed out successfully." })
   end
 
   def sign_up_form
@@ -42,6 +43,7 @@ class UserAuthenticationController < ApplicationController
 
   def create
     @user = User.new
+    
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
