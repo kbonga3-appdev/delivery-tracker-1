@@ -42,7 +42,7 @@
       <button>
         Log delivery
       </button>
-      
+
     </form>
 
   </div>
@@ -53,13 +53,19 @@
 <div class="waiting_on">
   <h2>Waiting on</h2>
 
+ <% @list_of_todos.each do |todos1| %>
+  
+
+  <% if todos1.status == "waiting on" %>
+  
+ 
+
   <ul>
       <li>
-        <div>Synergistic Marble Plate</div>
+        <div>delivery.description</div>
 
         <div style="color: red">
-          Supposed to arrive on
-          2023-03-06
+          delivery.date_edoa
         </div>
 
         <div>
@@ -75,98 +81,14 @@
         </div>
         
         <br>
-      </li>
-      <li>
-        <div>Rustic Linen Clock</div>
 
-        <div style="color: red">
-          Supposed to arrive on
-          2023-03-12
-        </div>
+<% end %>
+<% end %>
+---------------
 
-        <div>
-          FedEx tracking #502886106298
-        </div>
 
-        <div>
-          <form action="/modify_delivery/167331" method="post">
-            <input type="hidden" name="arrived" value="true">
 
-            <button>Mark as received</button>
-          </form>
-        </div>
-        
-        <br>
-      </li>
-      <li>
-        <div>Heavy Duty Cotton Keyboard</div>
-
-        <div style="color: red">
-          Supposed to arrive on
-          2023-03-15
-        </div>
-
-        <div>
-          UPS tracking #58442042806
-        </div>
-
-        <div>
-          <form action="/modify_delivery/167327" method="post">
-            <input type="hidden" name="arrived" value="true">
-
-            <button>Mark as received</button>
-          </form>
-        </div>
-        
-        <br>
-      </li>
-      <li>
-        <div>Intelligent Leather Shirt</div>
-
-        <div style="">
-          Supposed to arrive on
-          2023-03-29
-        </div>
-
-        <div>
-          
-        </div>
-
-        <div>
-          <form action="/modify_delivery/167329" method="post">
-            <input type="hidden" name="arrived" value="true">
-
-            <button>Mark as received</button>
-          </form>
-        </div>
-        
-        <br>
-      </li>
-      <li>
-        <div>Rustic Wooden Bag</div>
-
-        <div style="">
-          Supposed to arrive on
-          2023-04-01
-        </div>
-
-        <div>
-          UPS tracking #158805716925
-        </div>
-
-        <div>
-          <form action="/modify_delivery/167324" method="post">
-            <input type="hidden" name="arrived" value="true">
-
-            <button>Mark as received</button>
-          </form>
-        </div>
-        
-        <br>
-      </li>
-  </ul>
-</div>
-
+-----------------------
 <hr>
 
 <div class="received">

@@ -5,6 +5,7 @@ class CreateDeliveries < ActiveRecord::Migration[6.0]
       t.date :date_edoa
       t.text :details
       t.string :status
+     
 
       t.timestamps
     end
