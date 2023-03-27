@@ -32,9 +32,11 @@ class DeliveriesController < ApplicationController
   def create
     the_delivery = Delivery.new
     the_delivery.description = params.fetch("query_description")
-    the_delivery.date_edoa = params.fetch("query_date_edoa")
+    the_delivery.date_edoa = params.fetch("query_supposed_to_arrive_on")
+    # the_delivery.date_edoa = params.fetch("query_date_edoa")
     the_delivery.details = params.fetch("query_details")
-    the_delivery.status = params.fetch("query_status")
+    the_delivery.status = "waiting on"
+    # the_delivery.status = params.fetch("query_status")
 
     if the_delivery.valid?
       the_delivery.save
