@@ -1,10 +1,22 @@
 class DeliveriesController < ApplicationController
   def index
-    matching_deliveries = Delivery.all
 
-    @list_of_deliveries = matching_deliveries.order({ :created_at => :desc })
 
-    render({ :template => "deliveries/index.html.erb" })
+    user_ids = session.fetch(:user_id)
+    
+    matching_todos = Delivery.where({ :user_id => user_ids })
+
+    @list_of_todos = matching_todos.order({ :created_at => :asc })
+
+
+
+    # matching_deliveries = Delivery.all
+
+    # @list_of_deliveries = matching_deliveries.order({ :created_at => :desc })
+
+    # render({ :template => "deliveries/index.html.erb" })
+    
+    render({ :template => "deliveries/delivery.html.erb" })
   end
 
   def show

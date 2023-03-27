@@ -3,7 +3,10 @@ class UserAuthenticationController < ApplicationController
   # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
 
   def sign_in_form
-    render({ :template => "user_authentication/sign_in.html.erb" })
+
+     render({ :template => "user_authentication/sign_in.html.erb" })
+
+    # render({ :template => "deliveries/delivery.html.erb" })
   end
 
   def create_cookie
@@ -19,7 +22,8 @@ class UserAuthenticationController < ApplicationController
       else
         session[:user_id] = user.id
       
-        redirect_to("/", { :notice => "Signed in successfully." })
+        # redirect_to("/", { :notice => "Signed in successfully." })
+        redirect_to("/", { :notice => "User account created successfully."})
       end
     else
       redirect_to("/user_sign_in", { :alert => "No user with that email address." })
@@ -47,7 +51,9 @@ class UserAuthenticationController < ApplicationController
     if save_status == true
       session[:user_id] = @user.id
    
-      redirect_to("/", { :notice => "User account created successfully."})
+       redirect_to("/", { :notice => "User account created successfully."})
+
+      
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
     end
@@ -78,5 +84,26 @@ class UserAuthenticationController < ApplicationController
     
     redirect_to("/", { :notice => "User account cancelled" })
   end
+
+  def authenticate
+    un = params.fetch("query_email")
+    pw = params.fetch("query_password")
+
+    user = User.where({ :email => un }).at(0)
+
+    if user == nil
+      redirect_to("/user_sign_in", { :alert => "Username not found! "})
+    else
+     if user.authenticate(pw)
+      session.store(:user_id, user.id)
+
+      # redirect_to("/todos/#{user.id}", { :notice => "Welcome back " + user.email + "!"})
+      redirect_to("/", { :notice => "Welcome back " + user.email + "!"})
+     else
+      redirect_to("/user_sign_in", { :alert => "Wrong Password!"})
+     end
+    end
+  end
+  
  
 end

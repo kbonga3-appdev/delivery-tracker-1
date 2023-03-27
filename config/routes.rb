@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # Routes for the Delivery resource:
 
   # CREATE
+  
+
+  get("/", { :controller => "deliveries", :action => "index" })
+
   post("/insert_delivery", { :controller => "deliveries", :action => "create" })
           
   # READ
@@ -24,7 +28,11 @@ Rails.application.routes.draw do
   # Routes for the User account:
 
   # SIGN UP FORM
-  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
+
+
+  get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })    
+  
+  
   # CREATE RECORD
   post("/insert_user", { :controller => "user_authentication", :action => "create"  })
       
@@ -39,7 +47,8 @@ Rails.application.routes.draw do
   # ------------------------------
 
   # SIGN IN FORM
-  get("/", { :controller => "user_authentication", :action => "sign_in_form" })
+  # get("/", { :controller => "user_authentication", :action => "sign_in_form" })
+
   get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
   # AUTHENTICATE AND STORE COOKIE
   post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
